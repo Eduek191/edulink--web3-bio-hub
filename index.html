@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eduek Sampson - Web3 Content Creator & Product Manager</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-dark: #0a0e27;
+      --bg-card: #1a1f3a;
+      --border-subtle: #2d3250;
+      --text-primary: #ffffff;
+      --text-secondary: #a0aec0;
+      --accent-blue: #3b82f6;
+      --accent-blue-hover: #2563eb;
+      --accent-purple: #8b5cf6;
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+      --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+      background: linear-gradient(135deg, var(--bg-dark) 0%, #0f1229 100%);
+      color: var(--text-primary);
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      padding: 20px;
+      position: relative;
+    }
+
+    /* Animated background elements */
+    .bg-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .blob {
+      position: absolute;
+      opacity: 0.05;
+      border-radius: 50%;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .blob-1 {
+      width: 400px;
+      height: 400px;
+      background: var(--accent-blue);
+      top: -100px;
+      right: -100px;
+      animation-delay: 0s;
+    }
+
+    .blob-2 {
+      width: 300px;
+      height: 300px;
+      background: var(--accent-purple);
+      bottom: -50px;
+      left: -50px;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translate(0px, 0px);
+      }
+      50% {
+        transform: translate(30px, 30px);
+      }
+    }
+
+    /* Main container */
+    .container {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 420px;
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Profile section */
+    .profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 40px;
+    }
+
+    .profile-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      margin-bottom: 24px;
+      box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+      animation: scaleIn 0.8s ease-out;
+      border: 2px solid var(--border-subtle);
+      object-fit: cover;
+    }
+
+    @keyframes scaleIn {
+      from {
+        transform: scale(0.8);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .name {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+      animation: fadeInUp 0.8s ease-out 0.1s both;
+    }
+
+    .title {
+      font-size: 14px;
+      color: var(--text-secondary);
+      font-weight: 500;
+      margin-bottom: 12px;
+      animation: fadeInUp 0.8s ease-out 0.15s both;
+    }
+
+    .tagline {
+      font-size: 13px;
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.6;
+      max-width: 280px;
+      animation: fadeInUp 0.8s ease-out 0.2s both;
+    }
+
+    /* Links section */
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+      animation: fadeInUp 0.8s ease-out 0.25s both;
+    }
+
+    .link-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 24px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      background: rgba(59, 130, 246, 0.1);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .link-button:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: var(--accent-blue);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.2);
+    }
+
+    .link-button:hover::before {
+      left: 100%;
+    }
+
+    .link-icon {
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 24px;
+      animation: fadeInUp 0.8s ease-out 0.3s both;
+    }
+
+    .cta-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px 32px;
+      border-radius: 12px;
+      font-size: 15px;
+      font-weight: 700;
+      text-decoration: none;
+      border: none;
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+      color: var(--text-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: left 0.5s ease;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(59, 130, 246, 0.4);
+    }
+
+    .cta-button:hover::before {
+      left: 100%;
+    }
+
+    /* Create Your Own */
+    .create-own {
+      text-align: center;
+      margin-top: 32px;
+      animation: fadeInUp 0.8s ease-out 0.35s both;
+    }
+
+    .create-own-text {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .create-own-button {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+      border: 1px solid var(--border-subtle);
+      background: transparent;
+      color: var(--accent-blue);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .create-own-button:hover {
+      background: rgba(59, 130, 246, 0.1);
+      border-color: var(--accent-blue);
+    }
+
+    /* Footer */
+    .footer {
+      text-align: center;
+      font-size: 11px;
+      color: #6b7280;
+      margin-top: 40px;
+      animation: fadeInUp 0.8s ease-out 0.4s both;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .profile-image {
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+      }
+
+      .name {
+        font-size: 24px;
+      }
+
+      .link-button, .cta-button {
+        font-size: 14px;
+        padding: 13px 20px;
+      }
+
+      .cta-button {
+        padding: 14px 28px;
+      }
+    }
+
+    /* Modal for customization */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    .modal-content {
+      background: var(--bg-card);
+      border-radius: 16px;
+      padding: 32px;
+      max-width: 500px;
+      width: 100%;
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-md);
+      animation: slideUp 0.3s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .modal-header {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      font-size: 24px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .close-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      color: var(--text-secondary);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      background: rgba(0, 0, 0, 0.3);
+      color: var(--text-primary);
+      font-size: 14px;
+      font-family: inherit;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      background: rgba(59, 130, 246, 0.05);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .form-actions button {
+      flex: 1;
+      padding: 12px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+    }
+
+    .btn-create {
+      background: linear-gradient(135deg, var(--accent-blue) 0%, var(--accent-purple) 100%);
+      color: var(--text-primary);
+    }
+
+    .btn-create:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-cancel {
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-cancel:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--text-secondary);
+    }
+
+    .preview-section {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    .preview-text {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .preview-box {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      word-break: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-elements">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <div class="container">
+    <div class="profile">
+      <div class="profile-image" id="profileImage">📱</div>
+      <h1 class="name" id="profileName">Eduek Sampson</h1>
+      <p class="title" id="profileTitle">Web3 Content Creator & Product Manager at NodeOps</p>
+      <p class="tagline" id="profileTagline">Building the future of decentralized operations. Sharing insights on Web3, product strategy, and digital innovation.</p>
+    </div>
+
+    <div class="links" id="linksList">
+      <a href="https://nodeops.xyz" target="_blank" rel="noopener noreferrer" class="link-button">
+        <span class="link-icon">🚀</span>
+        <span>NodeOps</span>
+      </a>
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="link-button">
+        <span class="link-icon">𝕏</span>
+        <span>Twitter/X</span>
+      </a>
+      <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="link-button">
+        <span class="link-icon">💼</span>
+        <span>LinkedIn</span>
+      </a>
+      <a href="#" class="link-button" id="portfolioLink">
+        <span class="link-icon">✨</span>
+        <span>Portfolio</span>
+      </a>
+    </div>
+
+    <div class="cta-section">
+      <button class="cta-button" id="ctaButton">
+        💬 Work With Me
+      </button>
+    </div>
+
+    <div class="create-own">
+      <p class="create-own-text">Create your own link-in-bio page</p>
+      <button class="create-own-button" id="createOwnBtn">Get Started Free</button>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>© 2026 LinkBio. Built with ✨ by modern creators.</p>
+  </div>
+
+  <!-- Modal for customization -->
+  <div class="modal" id="customModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span>Create Your LinkBio</span>
+        <button class="close-btn" id="closeModal">×</button>
+      </div>
+
+      <form id="customForm">
+        <div class="form-group">
+          <label for="customName">Full Name</label>
+          <input type="text" id="customName" placeholder="e.g., Sarah Johnson" required>
+        </div>
+
+        <div class="form-group">
+          <label for="customTitle">Title & Company</label>
+          <input type="text" id="customTitle" placeholder="e.g., Designer at Creative Studio" required>
+        </div>
+
+        <div class="form-group">
+          <label for="customTagline">Bio / Tagline</label>
+          <textarea id="customTagline" placeholder="Share a brief bio about yourself..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="customPortfolio">Portfolio URL</label>
+          <input type="url" id="customPortfolio" placeholder="https://yourportfolio.com">
+        </div>
+
+        <div class="form-group">
+          <label for="customTwitter">Twitter/X URL</label>
+          <input type="url" id="customTwitter" placeholder="https://twitter.com/yourhandle">
+        </div>
+
+        <div class="form-group">
+          <label for="customLinkedIn">LinkedIn URL</label>
+          <input type="url" id="customLinkedIn" placeholder="https://linkedin.com/in/yourprofile">
+        </div>
+
+        <div class="form-group">
+          <label for="customPrimary">Primary URL (e.g., company website)</label>
+          <input type="url" id="customPrimary" placeholder="https://yourcompany.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="customEmoji">Profile Emoji</label>
+          <input type="text" id="customEmoji" placeholder="e.g., 👩‍💼" maxlength="2" value="📱">
+        </div>
+
+        <div class="preview-section">
+          <p class="preview-text">Preview</p>
+          <div class="preview-box">
+            <strong>Name:</strong> <span id="previewName">Your Name</span><br>
+            <strong>Title:</strong> <span id="previewTitle">Your Title</span><br>
+            <strong>Bio:</strong> <span id="previewBio">Your tagline here...</span>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-create">Create LinkBio</button>
+          <button type="button" class="btn-cancel" id="cancelForm">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('customModal');
+    const createOwnBtn = document.getElementById('createOwnBtn');
+    const closeModal = document.getElementById('closeModal');
+    const cancelForm = document.getElementById('cancelForm');
+    const customForm = document.getElementById('customForm');
+    const ctaButton = document.getElementById('ctaButton');
+
+    // Form inputs
+    const customName = document.getElementById('customName');
+    const customTitle = document.getElementById('customTitle');
+    const customTagline = document.getElementById('customTagline');
+    const customPortfolio = document.getElementById('customPortfolio');
+    const customTwitter = document.getElementById('customTwitter');
+    const customLinkedIn = document.getElementById('customLinkedIn');
+    const customPrimary = document.getElementById('customPrimary');
+    const customEmoji = document.getElementById('customEmoji');
+
+    // Preview elements
+    const previewName = document.getElementById('previewName');
+    const previewTitle = document.getElementById('previewTitle');
+    const previewBio = document.getElementById('previewBio');
+
+    // Modal controls
+    createOwnBtn.addEventListener('click', () => {
+      modal.classList.add('active');
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    cancelForm.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+
+    // Live preview
+    customName.addEventListener('input', (e) => {
+      previewName.textContent = e.target.value || 'Your Name';
+    });
+
+    customTitle.addEventListener('input', (e) => {
+      previewTitle.textContent = e.target.value || 'Your Title';
+    });
+
+    customTagline.addEventListener('input', (e) => {
+      previewBio.textContent = e.target.value || 'Your tagline here...';
+    });
+
+    // Form submission
+    customForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const formData = {
+        name: customName.value,
+        title: customTitle.value,
+        tagline: customTagline.value,
+        portfolio: customPortfolio.value,
+        twitter: customTwitter.value,
+        linkedin: customLinkedIn.value,
+        primary: customPrimary.value,
+        emoji: customEmoji.value || '📱'
+      };
+
+      // Save to localStorage
+      localStorage.setItem('linkbio_data', JSON.stringify(formData));
+
+      // Update page
+      updatePageWithData(formData);
+
+      // Close modal
+      modal.classList.remove('active');
+
+      // Reset form
+      customForm.reset();
+      customEmoji.value = '📱';
+    });
+
+    // Update page with custom data
+    function updatePageWithData(data) {
+      document.getElementById('profileName').textContent = data.name;
+      document.getElementById('profileTitle').textContent = data.title;
+      document.getElementById('profileTagline').textContent = data.tagline;
+      document.getElementById('profileImage').textContent = data.emoji;
+
+      // Update portfolio link
+      const portfolioLink = document.getElementById('portfolioLink');
+      if (data.portfolio) {
+        portfolioLink.href = data.portfolio;
+        portfolioLink.style.display = 'flex';
+      }
+
+      // Update other links
+      const links = document.querySelectorAll('.link-button');
+      if (data.twitter) {
+        links[1].href = data.twitter;
+      }
+      if (data.linkedin) {
+        links[2].href = data.linkedin;
+      }
+
+      // Update primary CTA
+      ctaButton.addEventListener('click', () => {
+        window.open(data.primary, '_blank');
+      });
+    }
+
+    // CTA button for default profile
+    ctaButton.addEventListener('click', () => {
+      window.open('mailto:work@eduek.com?subject=Let%27s%20Collaborate', '_blank');
+    });
+
+    // Load saved data from localStorage
+    window.addEventListener('DOMContentLoaded', () => {
+      const savedData = localStorage.getItem('linkbio_data');
+      if (savedData) {
+        const data = JSON.parse(savedData);
+        updatePageWithData(data);
+      }
+    });
+
+    // Smooth scroll for mobile
+    document.addEventListener('click', (e) => {
+      if (e.target.tagName === 'A' && e.target.href.startsWith('#')) {
+        e.preventDefault();
+        const target = document.querySelector(e.target.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    });
+  </script>
+</body>
+</html>
